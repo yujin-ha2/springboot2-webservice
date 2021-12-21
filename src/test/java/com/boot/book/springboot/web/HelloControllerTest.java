@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.is;
 
 @WebMvcTest
 : 스트링 테스트 어노테이션 중, Web(Spring MVC)에 집중하는 어노테이션. 선언시 @Controller, @ControllerAdvice 등 사용 가능
+  참고로 @WebMvcTest는 JPA 기능은 작동하지 않기 때문에 JPA 기능까지 한번에 테스트하려는 경우 @SpringBootTest와 TestRestTemplate를 사용한다.
 
 @Autowired
 : 스프링이 관리하는 빈(Bean)으 주입받는다
