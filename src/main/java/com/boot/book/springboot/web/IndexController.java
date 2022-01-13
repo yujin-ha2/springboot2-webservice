@@ -1,5 +1,7 @@
 package com.boot.book.springboot.web;
 
+import com.boot.book.springboot.config.auth.LoginUser;
+import com.boot.book.springboot.config.auth.dto.SessionUser;
 import com.boot.book.springboot.service.posts.PostsService;
 import com.boot.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 /*
 - 머스테치 스타터 덕분에 컨트롤러에서 문자열 반활할 때 앞의 경로는 src/main/resources/templates로 뒤의 파일 확장자는 .mustache가 붙는다.
@@ -20,10 +25,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
+        //SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        return "index";
+    }
+
+    @GetMapping("/posts")
+    public String postsSearch(@RequestParam String search, @RequestParam String keyword, Model model){
+        model.addAttribute("posts", postsService.findBySearch(search, keyword));
         return "index";
     }
 

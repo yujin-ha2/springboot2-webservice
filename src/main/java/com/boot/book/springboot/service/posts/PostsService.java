@@ -44,6 +44,14 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findBySearch(String search, String keyword){
+        List<Posts> responseDtoList = (search.equals("title")) ? postsRepository.findAllByTitleContaining(keyword) : postsRepository.findAllByAuthorContaining(keyword);
+        return responseDtoList.stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void delete(Long id) {
         Posts posts = postsRepository.findById(id)

@@ -17,7 +17,7 @@ Application.class -> 메인클래스
 : 외부에 WAS를 두지않고 애플리케이션 실행시 내부에서 WAS를 실행하는 것, 서버에 톰캣 설치할 필요 없어짐
 */
 
-@EnableJpaAuditing
+//@EnableJpaAuditing - 분리
 @SpringBootApplication
 public class Application {
     public static void main(String[] args){

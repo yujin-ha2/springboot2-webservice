@@ -77,4 +77,31 @@ public class PostsRepositoryTest {
         assertThat(posts.getCreatedDate()).isAfter(now);
         assertThat(posts.getModifiedDate()).isAfter(now);
     }
+
+    @Test
+    public void 게시글_검색(){
+        //given
+        String title = "옥상에서 만나요";
+        String content = "테스트 본문";
+
+        postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author("정세랑")
+                .build());
+
+        postsRepository.save(Posts.builder()
+                .title("옥상에서2")
+                .content(content)
+                .author("정세란")
+                .build());
+
+        //when
+        List<Posts> postsList = postsRepository.findAllByTitleContaining("옥상");
+
+        //then
+        assertThat(postsList.size()).isEqualTo(2);
+        System.out.println(">>>>postsList.get(0).getTitle=" + postsList.get(0).getTitle() + ", postsList.get(1).getTitle=" + postsList.get(1).getTitle());
+
+    }
 }

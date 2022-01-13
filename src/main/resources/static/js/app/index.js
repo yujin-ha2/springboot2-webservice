@@ -12,6 +12,10 @@ var main = {
         $('#btn-delete').on('click', function() {
             _this.delete();
         });
+
+        $('#btn-search').on('click', function() {
+            _this.search();
+        });
     },
     save : function () {
         var data = {
@@ -68,6 +72,14 @@ var main = {
         }).fail(function() {
             alert(JSON.stringify(error));
         });
+    },
+    search : function() {
+        var search = $('#select-search').val();
+        var keyword = $('#keyword').val();
+        console.log("search:" + search + ", keyword:" + keyword);
+
+        console.log('이동');
+        window.location.href='/posts?search='+search+'&keyword='+keyword;
     }
 
 };

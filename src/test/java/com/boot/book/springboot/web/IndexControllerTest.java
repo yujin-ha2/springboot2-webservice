@@ -1,13 +1,20 @@
 package com.boot.book.springboot.web;
 
+import com.boot.book.springboot.domain.posts.Posts;
+import com.boot.book.springboot.domain.posts.PostsRepository;
+import com.boot.book.springboot.web.dto.PostsSaveRequestDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -24,4 +31,5 @@ public class IndexControllerTest {
         //then
         assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
     }
+
 }
